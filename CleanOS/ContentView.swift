@@ -40,7 +40,7 @@ struct ContentView: View {
     }
 
 
-//testopenclaw1
+//testopenclaw2
     private func addItem() {
         withAnimation {
             let newItem = Item(timestamp: Date())
