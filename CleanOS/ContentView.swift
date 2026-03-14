@@ -38,12 +38,8 @@ struct ContentView: View {
             Text("Select an item")
         }
     }
-<<<<<<< HEAD
-    //ttt
-=======
-    //ggg
->>>>>>> fbbfeaca399f73cbf33c6f74c90c91a5c76b1b3c
 
+//test
     private func addItem() {
         withAnimation {
             let newItem = Item(timestamp: Date())
