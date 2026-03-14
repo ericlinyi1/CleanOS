@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct IOSCleanupProApp: App {
+struct CleanOSApp: App {
     var body: some Scene {
         WindowGroup {
             OnboardingView()
