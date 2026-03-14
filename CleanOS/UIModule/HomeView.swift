@@ -2,47 +2,71 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        ZStack {
-            Color.black.ignoresSafeArea()
-            ScrollView {
-                VStack(spacing: 30) {
-                    // Header with Progress
-                    VStack(spacing: 20) {
-                        ZStack {
-                            Circle()
-                                .stroke(Color.white.opacity(0.1), lineWidth: 15)
-                                .frame(width: 200, height: 200)
-                            Circle()
-                                .trim(from: 0, to: 0.72)
-                                .stroke(LinearGradient(colors: [.blue, .cyan], startPoint: .top, endPoint: .bottom), style: StrokeStyle(lineWidth: 15, lineCap: .round))
-                                .frame(width: 200, height: 200)
-                                .rotationEffect(.degrees(-90))
-                            VStack {
-                                Text("72%")
-                                    .font(.system(size: 40, weight: .black))
-                                    .foregroundColor(.white)
-                                Text("USED")
-                                    .font(.caption2)
-                                    .bold()
-                                    .foregroundColor(.gray)
+        NavigationStack {
+            ZStack {
+                Color.black.ignoresSafeArea()
+                ScrollView {
+                    VStack(spacing: 30) {
+                        VStack(spacing: 20) {
+                            ZStack {
+                                Circle()
+                                    .stroke(Color.white.opacity(0.1), lineWidth: 15)
+                                    .frame(width: 200, height: 200)
+                                Circle()
+                                    .trim(from: 0, to: 0.72)
+                                    .stroke(LinearGradient(colors: [.blue, .cyan], startPoint: .top, endPoint: .bottom), style: StrokeStyle(lineWidth: 15, lineCap: .round))
+                                    .frame(width: 200, height: 200)
+                                    .rotationEffect(.degrees(-90))
+                                VStack {
+                                    Text("72%")
+                                        .font(.system(size: 40, weight: .black))
+                                        .foregroundColor(.white)
+                                    Text("USED")
+                                        .font(.caption2)
+                                        .bold()
+                                        .foregroundColor(.gray)
+                                }
                             }
                         }
-                        Text("CleanOS")
-                            .font(.title2).bold()
-                            .foregroundColor(.white)
-                    }
-                    .padding(.top, 40)
+                        .padding(.top, 40)
 
-                    // Action Grid
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
-                        CategoryCard(title: "Duplicates", subtitle: "2.4 GB", icon: "clone", color: .blue)
-                        CategoryCard(title: "Similar", subtitle: "4.1 GB", icon: "photo.on.rectangle", color: .purple)
-                        CategoryCard(title: "Blurry", subtitle: "850 MB", icon: "eye.slash", color: .orange)
-                        CategoryCard(title: "Screenshots", subtitle: "1.2 GB", icon: "iphone", color: .green)
+                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
+                            NavigationLink(destination: PhotoSelectionView(category: "Duplicates")) {
+                                CategoryCard(title: "Duplicates", subtitle: "2.4 GB", icon: "clone", color: .blue)
+                            }
+                            NavigationLink(destination: PhotoSelectionView(category: "Similar")) {
+                                CategoryCard(title: "Similar", subtitle: "4.1 GB", icon: "photo.on.rectangle", color: .purple)
+                            }
+                            NavigationLink(destination: PhotoSelectionView(category: "Blurry")) {
+                                CategoryCard(title: "Blurry", subtitle: "850 MB", icon: "eye.slash", color: .orange)
+                            }
+                            NavigationLink(destination: PhotoSelectionView(category: "Screenshots")) {
+                                CategoryCard(title: "Screenshots", subtitle: "1.2 GB", icon: "iphone", color: .green)
+                            }
+                        }
+                        .padding(.horizontal)
+                        
+                        NavigationLink(destination: VideoCleanupView()) {
+                            HStack {
+                                Image(systemName: "envelope.fill")
+                                    .foregroundColor(.red)
+                                Text("Email & Video Cleanup")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
+                            .padding()
+                            .background(Color.white.opacity(0.05))
+                            .cornerRadius(15)
+                            .padding(.horizontal)
+                        }
                     }
-                    .padding(.horizontal)
                 }
             }
+            .navigationTitle("CleanOS")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
