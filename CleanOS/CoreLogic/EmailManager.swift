@@ -1,13 +1,16 @@
 import Foundation
 
-struct EmailAccount {
-    let email: String
-    let provider: String
+struct EmailCleanupStats {
+    let junkCount: Int
+    let largeAttachmentsSize: Int64
 }
 
 class EmailManager {
-    func scanJunk(in account: EmailAccount) async -> Int {
-        // Mock scan logic for demo
-        return Int.random(in: 100...2000)
+    static let shared = EmailManager()
+    
+    func scanForCleanup() async -> EmailCleanupStats {
+        // Real-world: Connect to IMAP/Gmail API
+        // For project scope: Mock intelligent scan result
+        return EmailCleanupStats(junkCount: 1240, largeAttachmentsSize: 3500 * 1024 * 1024)
     }
 }
